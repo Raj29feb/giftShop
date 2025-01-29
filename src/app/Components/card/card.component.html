@@ -1,0 +1,25 @@
+<mat-card class="example-card" appearance="outlined">
+  <img
+    *ngIf="prd_detail.image"
+    [src]="prd_detail.image"
+    class="h-[200px] border-b border-[#afafaf]"
+    mat-card-image
+    alt="Prodcut Image"
+  />
+  <mat-card-content class="!flex !flex-col !gap-1">
+    <p class="text-m text-gray-500">
+      {{ prd_detail.title }}
+    </p>
+    <p class="text-sm text-gray-500">
+      {{ prd_detail.brand }}
+    </p>
+    <p class="flex items-center justify-between">
+      <span class="font-medium text-sm">${{ prd_detail.price }}</span>
+      <button
+        class="text-xs border border-[#1e6474] text-[#1e6474] px-2 rounded-[5px] cursor-pointer"
+      >
+        Buy On Brand Site
+      </button>
+    </p>
+  </mat-card-content>
+</mat-card>

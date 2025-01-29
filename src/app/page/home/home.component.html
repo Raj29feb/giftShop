@@ -1,0 +1,245 @@
+<div class="home-mainSec">
+  <!--Below the navbar (part1)-->
+  <div class="below-navbar">
+    <section class="toggle">
+      <span class="text-[#1e6474] font-medium hidden md:inline"
+        >Shopping for:</span
+      >
+      <span class="font-medium">Adult</span>
+      <mat-slide-toggle class="example-margin" color="accent">
+      </mat-slide-toggle>
+      <span class="font-medium">Kids</span>
+    </section>
+    <div class="flex gap-6 items-center">
+      <p class="text-[#1e6474]">Need Help?</p>
+      <button
+        class="bg-[#1e6474] text-white px-5 py-1.25 rounded-sm cursor-pointer"
+      >
+        Ask Charlotte
+      </button>
+    </div>
+  </div>
+  <!--filter and sort-->
+  <div class="home-body-section flex flex-wrap gap-1.5 px-10 justify-around">
+    <p class="w-full flex justify-between my-6">
+      <span class="font-medium text-xl">Filters</span
+      ><span class="flex items-center"
+        ><span class="font-medium text-xl">SORT BY</span>
+        <mat-icon
+          class="cursor-pointer"
+          fontIcon="keyboard_arrow_down"
+        ></mat-icon
+      ></span>
+    </p>
+    <!--Left side filter options-->
+    <div class="filter-section w-[365px]">
+      <div class="filter-options flex flex-col gap-5">
+        <label class="flex justify-between onOurSite" for=""
+          ><span class="text-[#1e6474]">Buy On Our Site</span
+          ><mat-checkbox></mat-checkbox
+        ></label>
+        <div class="flex flex-col filterScroller">
+          <mat-form-field floatLabel="always" class="example-full-width">
+            <mat-label class="text-[#1e6474]">Gift For<sup>*</sup></mat-label>
+            <mat-select placeholder="Select Pronoun">
+              <mat-option class="!text-[#1e6474]" value="Her">Her</mat-option>
+              <mat-option class="!text-[#1e6474]" value="Him">Him</mat-option>
+              <mat-option class="!text-[#1e6474]" value="Anyone"
+                >Anyone</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field floatLabel="always" class="example-full-width">
+            <mat-label class="text-[#1e6474]">Occassion</mat-label>
+            <mat-select placeholder="Select occassion">
+              <mat-option
+                *ngFor="let occasion of occasions"
+                value="occassion"
+                class="!text-[#1e6474]"
+                >{{ occasion }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field floatLabel="always" class="example-full-width">
+            <mat-label class="text-[#1e6474]">Relationship</mat-label>
+            <mat-select placeholder="Select Relationship">
+              <mat-option class="!text-[#1e6474]" value="Friend"
+                >Her</mat-option
+              >
+              <mat-option class="!text-[#1e6474]" value="Spouse / Partner"
+                >Spouse / Partner</mat-option
+              >
+              <mat-option class="!text-[#1e6474]" value="Girlfriend / Boyfriend"
+                >Girlfriend / Boyfriend</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <mat-accordion>
+            <mat-expansion-panel
+              expanded
+              class="no-border"
+              (opened)="panelOpenState.set(true)"
+              (closed)="panelOpenState.set(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title> Pricing range </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-slider
+                min="0"
+                max="1000"
+                color="primary"
+                discrete
+                [displayWith]="formatLabel"
+                class="!w-full"
+              >
+                <input value="0" matSliderStartThumb />
+                <input value="1000" matSliderEndThumb />
+              </mat-slider>
+              <div class="flex justify-between">
+                <span class="font-medium">$0</span>
+                <span class="font-medium">$500</span>
+                <span class="font-medium">$1000</span>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <hr class="text-gray-300 border-1" />
+          <mat-accordion>
+            <mat-expansion-panel
+              expanded
+              class="no-border"
+              (opened)="panelOpenState.set(true)"
+              (closed)="panelOpenState.set(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title> Gift Wrapping </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button
+                *ngFor="let gift of gifts; let i = index"
+                mat-stroked-button
+                size="small"
+                class="!font-normal hover:!bg-gray-100 !flex-row-reverse !gap-4 !p-2"
+                (click)="handleSignatureWrapping('giftWrapping' + i)"
+              >
+                <span>{{ gift }}</span>
+                <mat-icon
+                  fontIcon="close"
+                  style="display: none"
+                  id="giftWrapping{{ i }}"
+                  (click)="closeSignatureWrapping('giftWrapping' + i)"
+                ></mat-icon>
+              </button>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <hr class="text-gray-300 border-1" />
+          <mat-accordion>
+            <mat-expansion-panel
+              expanded
+              class="no-border !p-0"
+              (opened)="panelOpenState.set(true)"
+              (closed)="panelOpenState.set(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title> Interests </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="flex flex-wrap gap-2">
+                <button
+                  *ngFor="let interest of interests; let i = index"
+                  mat-stroked-button
+                  size="small"
+                  class="!font-normal hover:!bg-gray-100 !flex-row-reverse !gap-4 !p-2"
+                  (click)="handleSignatureWrapping('interests' + i)"
+                >
+                  <p class="flex gap-1 items-center">
+                    <mat-icon fontIcon="{{ interest.icon }}"></mat-icon
+                    ><span>{{ interest.name }}</span>
+                  </p>
+                  <mat-icon
+                    style="display: none"
+                    id="interests{{ i }}"
+                    fontIcon="close"
+                    (click)="closeSignatureWrapping('interests' + i)"
+                  ></mat-icon>
+                </button>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <!--social interests-->
+          <hr class="text-gray-300 border-1" />
+          <mat-accordion>
+            <mat-expansion-panel
+              class="no-border"
+              (opened)="panelOpenState.set(true)"
+              (closed)="panelOpenState.set(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>Social Interests (beta) </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="flex flex-wrap gap-2">
+                <button
+                  *ngFor="
+                    let social_interest of social_interests;
+                    let i = index
+                  "
+                  mat-stroked-button
+                  size="small"
+                  class="!font-normal hover:!bg-gray-100 !flex-row-reverse !gap-4 !p-2"
+                  (click)="handleSignatureWrapping('social_interests' + i)"
+                >
+                  <p class="flex gap-1 items-center">
+                    <mat-icon fontIcon="{{ social_interest.icon }}"></mat-icon
+                    ><span>{{ social_interest.name }}</span>
+                  </p>
+                  <mat-icon
+                    style="display: none"
+                    id="social_interests{{ i }}"
+                    fontIcon="close"
+                    (click)="closeSignatureWrapping('social_interests' + i)"
+                  ></mat-icon>
+                </button>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <!--color family-->
+          <hr class="text-gray-300 border-1" />
+          <mat-accordion>
+            <mat-expansion-panel
+              class="no-border"
+              (opened)="panelOpenState.set(true)"
+              (closed)="panelOpenState.set(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>Color Family (beta) </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="flex flex-wrap gap-5">
+                <button
+                  *ngFor="let color of colors; let i = index"
+                  mat-stroked-button
+                  class="!rounded-sm !border-0 !min-w-min"
+                  size="small"
+                  [ngStyle]="{
+                    background:
+                      i === colors.length - 1
+                        ? 'linear-gradient(180.98deg, rgb(255, 0, 0) 0.84%, rgb(250, 240, 0) 23.89%, rgba(36, 255, 0, 0.616) 45.4%, rgba(0, 255, 240, 0.37) 68.78%, rgb(51, 0, 255) 88.43%, rgb(255, 0, 245) 94.57%)'
+                        : color
+                  }"
+                ></button>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+    <!--Right side card group-->
+    <div class="h-auto w-fit flex flex-4 flex-wrap gap-3">
+      <app-card *ngFor="let prd of data" [prd_detail]="prd" />
+      <!-- <div class="w-full">
+        <app-pagination [productArr]="data" />
+      </div> -->
+    </div>
+  </div>
+  <app-footer />
+</div>

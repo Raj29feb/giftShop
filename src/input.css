@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+.navbar{
+    @apply !bg-white  flex flex-wrap justify-between;
+}
+.nav-icons{
+    @apply flex flex-wrap gap-4;
+}
+.logo-largePart{
+    @apply text-2xl lg:text-4xl font-bold font-serif
+}
+.smallScreenNav{
+    @apply lg:!hidden
+}
+.nav-options{
+    @apply flex flex-wrap gap-10 text-[20px];
+}
+.largeScreenNav{
+    @apply !hidden lg:!flex !px-10 !my-[10px] items-center
+}
+.badge{
+    @apply ml-3 mt-[5px] bg-red-500 text-white rounded-[50%] text-[15px] w-0 h-0 p-2.5 flex justify-center items-center;
+}
+.mdc-switch__icon--off,.mdc-switch__icon--on{
+    @apply !hidden
+}
+.mdc-switch__track::after{
+    @apply !bg-[#1e6474];
+}
+.mdc-switch__track::before{
+    @apply !bg-[#1e6474];
+}
+.mdc-switch__icons {
+    @apply bg-white rounded-[50%];
+}
+.mdc-switch__track::before{
+    @apply !border-0
+}
+.toggle{
+    @apply flex gap-2.5 items-center
+}
+.below-navbar{
+    -webkit-box-pack: justify;
+    background: linear-gradient(rgba(30, 100, 116, 0.1) 0%, rgba(30, 100, 116, 0) 130.85%);
+    @apply px-10 py-1.5 mb-3 flex flex-wrap justify-between;
+}
+.filter-options{
+    @apply max-w-[330px] border-[0.5px] border-gray-300 p-2.5 rounded-[5px]
+}
+.filter{
+    @apply flex justify-between w-full items-center
+}
+.onOurSite{
+    background: linear-gradient(rgba(195, 209, 212, 0.27) 0%, rgba(255, 255, 255, 0) 52.6%, rgba(195, 209, 212, 0.28) 100%);
+    @apply  border-[0.5px] border-gray-300 rounded-[5px] p-0 items-center pl-2.5
+}
+.content-toggle{
+    @apply text-[#1e6474] px-[20px] py-[10px] cursor-pointer
+}
+.hide_display{
+    @apply z-[1] bg-white border border-[#d5d5d5] py-2.5 rounded-[5px] overflow-y-auto flex flex-col gap-2.5 absolute w-full max-h-[300px]
+}
+.mat-mdc-text-field-wrapper {
+    @apply !bg-white border border-gray-400;
+}
+.mat-mdc-select-panel{
+    background: white !important;
+}
+mat-slider {
+    @apply w-[300px];
+  }

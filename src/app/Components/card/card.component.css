@@ -1,0 +1,9 @@
+.example-card {
+    width: 220px;
+  }
+  .mat-mdc-card-content{
+padding: 10px !important;
+}
+.mat-mdc-card-actions{
+    width: 100%;
+}

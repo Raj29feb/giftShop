@@ -1,0 +1,21 @@
+.giftFor{
+    border: 1px solid #d1d1d1;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.no-border {
+    box-shadow: none !important;
+    border: none !important; 
+    background-color: transparent !important;
+}
+.no-border:hover {
+    background-color: transparent !important;
+}
+.filter-options{
+    max-height: calc(-200px + 100vh);
+}
+.filterScroller{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
