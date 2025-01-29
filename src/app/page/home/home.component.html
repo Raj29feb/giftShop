@@ -235,11 +235,17 @@
     </div>
     <!--Right side card group-->
     <div class="h-auto w-fit flex flex-4 flex-wrap gap-3">
-      <app-card *ngFor="let prd of data" [prd_detail]="prd" />
-      <!-- <div class="w-full">
-        <app-pagination [productArr]="data" />
-      </div> -->
+      <app-card *ngFor="let prd of filteredData" [prd_detail]="prd" />
     </div>
   </div>
+  <!--pagination goes here-->
+  <mat-paginator
+    [length]="data.length"
+    [pageSize]="25"
+    aria-label="Select page"
+    class="!bg-white mt-10"
+    (page)="handlePageEvent($event)"
+  >
+  </mat-paginator>
   <app-footer />
 </div>

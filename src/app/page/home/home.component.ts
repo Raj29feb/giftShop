@@ -1,16 +1,11 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  signal,
-} from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CardComponent } from '../../Components/card/card.component';
 import { ApiServiceService } from '../../api-service.service';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../Components/footer/footer.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +21,10 @@ import { FooterComponent } from '../../Components/footer/footer.component';
 })
 export class HomeComponent implements OnInit {
   data = [];
-  //counter for pagination
+  filteredData = this.data;
+
+  //show per page 25 items.
+  //using angular mui for pagination
 
   startThumb = 0;
   readonly panelOpenState = signal(false);
@@ -100,6 +98,25 @@ export class HomeComponent implements OnInit {
   giftForOptions = false;
   selected = 'option2';
 
+  //set the data according to the page patch of 25 products
+  setFilteredData(pageIndex: number) {
+    const minPrdIndex = pageIndex * 25;
+    const maxPrdIndex = (pageIndex + 1) * 25 - 1;
+    this.filteredData = this.data.filter((prd, index) => {
+      if (index >= minPrdIndex && index <= maxPrdIndex) {
+        return prd;
+      }
+    });
+  }
+
+  //page event below
+
+  pageEvent!: PageEvent;
+
+  handlePageEvent(e: PageEvent) {
+    this.setFilteredData(e.pageIndex);
+  }
+
   //format label to show the marker along with $ sign before
   formatLabel(value: number): string {
     return `$${value}`;
@@ -111,6 +128,7 @@ export class HomeComponent implements OnInit {
       next: (response: any) => {
         // Handle successful response
         this.data = response.products;
+        this.filteredData = this.data;
       },
       error: (error) => {
         // Handle error

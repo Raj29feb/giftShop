@@ -1,0 +1,7 @@
+input::-webkit-input-placeholder { /* Chrome, Edge, Safari */
+    color: #999; /* Example placeholder color */
+  }
+  
+  input:-moz-placeholder { /* Firefox 19+ */
+    color: #999;
+  }
