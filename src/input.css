@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+:root{
+    --my-theme-color:#1e6474;
+}
+
 .navbar{
     @apply !bg-white  flex flex-wrap justify-between;
 }
@@ -25,10 +29,10 @@
     @apply !hidden
 }
 .mdc-switch__track::after{
-    @apply !bg-[#1e6474];
+    @apply !bg-[var(--my-theme-color)];
 }
 .mdc-switch__track::before{
-    @apply !bg-[#1e6474];
+    @apply !bg-[var(--my-theme-color)];
 }
 .mdc-switch__icons {
     @apply bg-white rounded-[50%];
@@ -55,7 +59,7 @@
     @apply  border-[0.5px] border-gray-300 rounded-[5px] p-0 items-center pl-2.5
 }
 .content-toggle{
-    @apply text-[#1e6474] px-[20px] py-[10px] cursor-pointer
+    @apply text-[var(--my-theme-color)] px-[20px] py-[10px] cursor-pointer
 }
 .hide_display{
     @apply z-[1] bg-white border border-[#d5d5d5] py-2.5 rounded-[5px] overflow-y-auto flex flex-col gap-2.5 absolute w-full max-h-[300px]
@@ -69,3 +73,9 @@
 mat-slider {
     @apply w-[300px];
   }
+.selected-filters{
+    @apply bg-[#1e647417] flex items-center py-2 px-4 whitespace-nowrap;
+}
+.primary-text-color{
+    @apply text-[var(--my-theme-color)]
+}

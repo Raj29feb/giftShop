@@ -21,16 +21,157 @@
   </div>
   <!--filter and sort-->
   <div class="home-body-section flex flex-wrap gap-1.5 px-10 justify-around">
-    <p class="w-full flex justify-between my-6">
-      <span class="font-medium text-xl">Filters</span
-      ><span class="flex items-center"
+    <div class="w-full flex justify-between my-6 items-center">
+      <span class="font-medium text-xl">Filters</span>
+      <!--Choosen filters-->
+      <div
+        class="flex overflow-x-auto items-center gap-5 font-medium"
+        *ngIf="
+          giftFor() ||
+          occ() ||
+          relationship() ||
+          budget() ||
+          giftWrapping.length > 0 ||
+          interestFilters.length > 0 ||
+          socialInterestsFilters.length > 0 ||
+          colorFilters.length > 0
+        "
+      >
+        <button
+          class="text-[#d42566] cursor-pointer hover:bg-gray-100 p-2 rounded-sm"
+          (click)="removeAllTheFilters()"
+        >
+          Clear All
+        </button>
+        <span class="selected-filters rounded-sm" *ngIf="giftFor()"
+          ><span class="primary-text-color mr-2"
+            >Gift For: {{ giftFor() }}</span
+          >
+          <mat-icon
+            class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
+            fontIcon="close"
+            (click)="removeGiftForFilter()"
+          ></mat-icon
+        ></span>
+        <span class="selected-filters rounded-sm" *ngIf="occ()"
+          ><span class="primary-text-color mr-2">Occassion: {{ occ() }}</span>
+          <mat-icon
+            class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
+            fontIcon="close"
+            (click)="removeOccassionFilter()"
+          ></mat-icon
+        ></span>
+        <span class="selected-filters rounded-sm" *ngIf="relationship()"
+          ><span class="primary-text-color mr-2"
+            >Relationship: {{ relationship() }}</span
+          >
+          <mat-icon
+            class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
+            fontIcon="close"
+            (click)="removeRelationFilter()"
+          ></mat-icon
+        ></span>
+        <span class="selected-filters rounded-sm" *ngIf="budget()"
+          ><span class="primary-text-color mr-2">Budget: {{ budget() }}</span>
+          <mat-icon
+            class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
+            fontIcon="close"
+            (click)="removeBudgetFilter()"
+          ></mat-icon
+        ></span>
+        <span
+          class="selected-filters rounded-sm"
+          *ngIf="giftWrapping.length > 0"
+          ><span class="primary-text-color mr-2"
+            >Gift Wrapping:
+            <span
+              *ngFor="
+                let giftWrap of giftWrapping;
+                let i = index;
+                let last = last
+              "
+            >
+              {{ giftWrap }}<span *ngIf="!last">, </span>
+            </span></span
+          >
+          <mat-icon
+            class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
+            fontIcon="close"
+            (click)="removeGiftWrappingFilter()"
+          ></mat-icon
+        ></span>
+        <span
+          class="selected-filters rounded-sm"
+          *ngIf="interestFilters.length > 0"
+          ><span class="primary-text-color mr-2"
+            >Interests:
+            <span
+              *ngFor="
+                let interestfilter of interestFilters;
+                let i = index;
+                let last = last
+              "
+            >
+              {{ interestfilter }}<span *ngIf="!last">, </span>
+            </span></span
+          >
+          <mat-icon
+            class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
+            fontIcon="close"
+            (click)="removeInterestsFilter()"
+          ></mat-icon
+        ></span>
+        <span
+          class="selected-filters rounded-sm"
+          *ngIf="socialInterestsFilters.length > 0"
+          ><span class="primary-text-color mr-2"
+            >Social Interests (beta):
+            <span
+              *ngFor="
+                let socialInterestfilter of socialInterestsFilters;
+                let i = index;
+                let last = last
+              "
+            >
+              {{ socialInterestfilter }}<span *ngIf="!last">, </span>
+            </span></span
+          >
+          <mat-icon
+            class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
+            fontIcon="close"
+            (click)="removeSocialInterestsFilter()"
+          ></mat-icon
+        ></span>
+        <span
+          class="selected-filters rounded-sm"
+          *ngIf="colorFilters.length > 0"
+          ><span class="primary-text-color mr-2"
+            >Color Family (beta):
+            <span
+              *ngFor="
+                let colorFilter of colorFilters;
+                let i = index;
+                let last = last
+              "
+            >
+              {{ colorFilter }}<span *ngIf="!last">, </span>
+            </span></span
+          >
+          <mat-icon
+            class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
+            fontIcon="close"
+            (click)="removeColorFilters()"
+          ></mat-icon
+        ></span>
+      </div>
+      <span class="flex items-center"
         ><span class="font-medium text-xl">SORT BY</span>
         <mat-icon
           class="cursor-pointer"
           fontIcon="keyboard_arrow_down"
         ></mat-icon
       ></span>
-    </p>
+    </div>
     <!--Left side filter options-->
     <div class="filter-section w-[365px]">
       <div class="filter-options flex flex-col gap-5">
@@ -41,7 +182,7 @@
         <div class="flex flex-col filterScroller">
           <mat-form-field floatLabel="always" class="example-full-width">
             <mat-label class="text-[#1e6474]">Gift For<sup>*</sup></mat-label>
-            <mat-select placeholder="Select Pronoun">
+            <mat-select placeholder="Select Pronoun" [(value)]="giftFor">
               <mat-option class="!text-[#1e6474]" value="Her">Her</mat-option>
               <mat-option class="!text-[#1e6474]" value="Him">Him</mat-option>
               <mat-option class="!text-[#1e6474]" value="Anyone"
@@ -51,10 +192,10 @@
           </mat-form-field>
           <mat-form-field floatLabel="always" class="example-full-width">
             <mat-label class="text-[#1e6474]">Occassion</mat-label>
-            <mat-select placeholder="Select occassion">
+            <mat-select placeholder="Select occassion" [(value)]="occ">
               <mat-option
                 *ngFor="let occasion of occasions"
-                value="occassion"
+                [value]="occasion"
                 class="!text-[#1e6474]"
                 >{{ occasion }}</mat-option
               >
@@ -62,10 +203,11 @@
           </mat-form-field>
           <mat-form-field floatLabel="always" class="example-full-width">
             <mat-label class="text-[#1e6474]">Relationship</mat-label>
-            <mat-select placeholder="Select Relationship">
-              <mat-option class="!text-[#1e6474]" value="Friend"
-                >Her</mat-option
-              >
+            <mat-select
+              placeholder="Select Relationship"
+              [(value)]="relationship"
+            >
+              <mat-option class="!text-[#1e6474]" value="Her">Her</mat-option>
               <mat-option class="!text-[#1e6474]" value="Spouse / Partner"
                 >Spouse / Partner</mat-option
               >
@@ -93,8 +235,16 @@
                 [displayWith]="formatLabel"
                 class="!w-full"
               >
-                <input value="0" matSliderStartThumb />
-                <input value="1000" matSliderEndThumb />
+                <input
+                  [value]="sliderStartValue"
+                  matSliderStartThumb
+                  (change)="handleStartThumb()"
+                />
+                <input
+                  [value]="sliderEndValue"
+                  matSliderEndThumb
+                  (change)="handleEndThumb()"
+                />
               </mat-slider>
               <div class="flex justify-between">
                 <span class="font-medium">$0</span>
@@ -122,7 +272,7 @@
                 class="!font-normal hover:!bg-gray-100 !flex-row-reverse !gap-4 !p-2"
                 (click)="handleSignatureWrapping('giftWrapping' + i)"
               >
-                <span>{{ gift }}</span>
+                <span id="{{ 'giftWrapping' + i + 'name' }}">{{ gift }}</span>
                 <mat-icon
                   fontIcon="close"
                   style="display: none"
@@ -148,6 +298,7 @@
                   *ngFor="let interest of interests; let i = index"
                   mat-stroked-button
                   size="small"
+                  id="interests{{ i }}name"
                   class="!font-normal hover:!bg-gray-100 !flex-row-reverse !gap-4 !p-2"
                   (click)="handleSignatureWrapping('interests' + i)"
                 >
@@ -179,6 +330,7 @@
               </mat-expansion-panel-header>
               <div class="flex flex-wrap gap-2">
                 <button
+                  id="social_interests{{ i }}name"
                   *ngFor="
                     let social_interest of social_interests;
                     let i = index
@@ -216,16 +368,19 @@
               </mat-expansion-panel-header>
               <div class="flex flex-wrap gap-5">
                 <button
+                  id="colors{{ i }}"
                   *ngFor="let color of colors; let i = index"
                   mat-stroked-button
+                  [attr.data-color]="color.name"
                   class="!rounded-sm !border-0 !min-w-min"
                   size="small"
                   [ngStyle]="{
                     background:
                       i === colors.length - 1
                         ? 'linear-gradient(180.98deg, rgb(255, 0, 0) 0.84%, rgb(250, 240, 0) 23.89%, rgba(36, 255, 0, 0.616) 45.4%, rgba(0, 255, 240, 0.37) 68.78%, rgb(51, 0, 255) 88.43%, rgb(255, 0, 245) 94.57%)'
-                        : color
+                        : color.code
                   }"
+                  (click)="handleColorSelection('colors' + i)"
                 ></button>
               </div>
             </mat-expansion-panel>
@@ -240,8 +395,8 @@
   </div>
   <!--pagination goes here-->
   <mat-paginator
-    [length]="data.length"
-    [pageSize]="25"
+    [length]="totalNumberOfProducts"
+    [pageSize]="24"
     aria-label="Select page"
     class="!bg-white mt-10"
     (page)="handlePageEvent($event)"

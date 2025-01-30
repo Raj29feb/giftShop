@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent implements OnInit {
-  title = `The Shiba Inu is the smallest of the six original and distinct spitz
+  name = `The Shiba Inu is the smallest of the six original and distinct spitz
       breeds of dog from Japan. A small, agile dog that copes very well with
       mountainous terrain, the Shiba Inu was originally bred for hunting.`;
   brand = 'Goldbelly';
@@ -24,14 +24,16 @@ export class CardComponent implements OnInit {
   @Input() prd_detail: any;
   constructor() {}
   fixLength() {
-    const prev_title = this.prd_detail.title;
-    this.prd_detail.title = this.prd_detail.title.slice(0, 20);
-    if (prev_title.length > 20) {
-      this.prd_detail.title = this.prd_detail.title + '...';
+    //make it on html inplace as this will change the orginal data that we never should do.
+    const prev_name = this.prd_detail.name;
+    this.prd_detail.name = this.prd_detail.name.slice(0, 20);
+    if (prev_name.length > 20) {
+      this.prd_detail.name = this.prd_detail.name + '...';
     }
   }
+
   ngOnInit(): void {
     this.fixLength();
-    console.log('data for product::', this.prd_detail);
+    // console.log('data for product::', this.prd_detail);
   }
 }
