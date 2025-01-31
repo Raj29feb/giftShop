@@ -18,7 +18,14 @@
         >${{ (prd_detail.price / 100).toFixed(2) }}</span
       >
       <button
-        class="text-xs border border-[#1e6474] text-[#1e6474] px-2 rounded-[5px] cursor-pointer"
+        class="text-xs border bg-[#1e6474] text-white px-2 py-0.25 rounded-[5px] cursor-pointer font-medium"
+        *ngIf="prd_detail.bigCommerceEnabled"
+      >
+        Buy On Our Site
+      </button>
+      <button
+        class="text-xs border border-[#1e6474] text-[#1e6474] px-2 rounded-[5px] cursor-pointer font-medium"
+        *ngIf="!prd_detail.bigCommerceEnabled"
       >
         Buy On Brand Site
       </button>

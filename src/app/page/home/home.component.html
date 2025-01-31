@@ -6,7 +6,12 @@
         >Shopping for:</span
       >
       <span class="font-medium">Adult</span>
-      <mat-slide-toggle class="example-margin" color="accent">
+      <mat-slide-toggle
+        class="example-margin"
+        color="accent"
+        [(ngModel)]="section"
+        (change)="handleSection()"
+      >
       </mat-slide-toggle>
       <span class="font-medium">Kids</span>
     </section>
@@ -177,7 +182,7 @@
       <div class="filter-options flex flex-col gap-5">
         <label class="flex justify-between onOurSite" for=""
           ><span class="text-[#1e6474]">Buy On Our Site</span
-          ><mat-checkbox></mat-checkbox
+          ><mat-checkbox (change)="handleOurPrdFilter()"></mat-checkbox
         ></label>
         <div class="flex flex-col filterScroller">
           <mat-form-field floatLabel="always" class="example-full-width">
@@ -207,7 +212,9 @@
               placeholder="Select Relationship"
               [(value)]="relationship"
             >
-              <mat-option class="!text-[#1e6474]" value="Her">Her</mat-option>
+              <mat-option class="!text-[#1e6474]" value="Friend"
+                >Friend</mat-option
+              >
               <mat-option class="!text-[#1e6474]" value="Spouse / Partner"
                 >Spouse / Partner</mat-option
               >

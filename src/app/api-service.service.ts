@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class ApiServiceService {
   constructor(private http: HttpClient) {}
   getProducts(url: string) {
+    //use pipe and return only the latest request.
     return this.http.get(url);
   }
 }
