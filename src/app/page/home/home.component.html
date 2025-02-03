@@ -39,7 +39,9 @@
           giftWrapping.length > 0 ||
           interestFilters.length > 0 ||
           socialInterestsFilters.length > 0 ||
-          colorFilters.length > 0
+          colorFilters.length > 0 ||
+          order() ||
+          orderby()
         "
       >
         <button
@@ -74,6 +76,17 @@
             class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
             fontIcon="close"
             (click)="removeRelationFilter()"
+          ></mat-icon
+        ></span>
+        <span class="selected-filters rounded-sm" *ngIf="order() || orderby"
+          ><span class="primary-text-color mr-2"
+            >Sort: <span *ngIf="orderby()">{{ orderby() }}</span
+            ><span *ngIf="order()"> : {{ order() }}</span></span
+          >
+          <mat-icon
+            class="!text-white bg-[#1e6474] rounded-[50%] cursor-pointer"
+            fontIcon="close"
+            (click)="removeSortFilter()"
           ></mat-icon
         ></span>
         <span class="selected-filters rounded-sm" *ngIf="budget()"
@@ -169,13 +182,27 @@
           ></mat-icon
         ></span>
       </div>
-      <span class="flex items-center"
-        ><span class="font-medium text-xl">SORT BY</span>
-        <mat-icon
-          class="cursor-pointer"
-          fontIcon="keyboard_arrow_down"
-        ></mat-icon
+      <span
+        class="flex items-center cursor-pointer hover:bg-gray-200 p-2 rounded-sm"
+        [matMenuTriggerFor]="sortBy"
+        ><span class="font-medium text-md">SORT BY</span>
+        <mat-icon fontIcon="keyboard_arrow_down"></mat-icon
       ></span>
+      <mat-menu #sortBy="matMenu">
+        <button mat-menu-item (click)="selectSortBy('price-asc')">
+          Price : Low to High
+        </button>
+        <button mat-menu-item (click)="selectSortBy('price-desc')">
+          Price : High to Low
+        </button>
+        <button mat-menu-item (click)="selectSortBy('newest')">Newest</button>
+        <button mat-menu-item (click)="selectSortBy('marketplace')">
+          To&From Marketplace
+        </button>
+        <button mat-menu-item (click)="selectSortBy('trending')">
+          Trending
+        </button>
+      </mat-menu>
     </div>
     <!--Left side filter options-->
     <div class="filter-section w-[365px]">
